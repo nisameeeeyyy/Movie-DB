@@ -6,12 +6,12 @@ const app = express();
 app.get("/get-all-movies", async (req, res) => {
   try {
     // Query the database for all movies
-    const movies = await Movie.find();
+    const movies = await Movie.find().sort({createdAt: -1});
 
     // Send the movies back in the response
     res.status(200).json({
       success: true,
-      data: movies,
+      movies,
     });
   } catch (error) {
     // Handle any errors that occur during the query

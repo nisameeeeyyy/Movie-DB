@@ -8,31 +8,11 @@ const movieSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    releaseDate: {
+    year: {
       type: Date,
       required: true,
     },
-    genres: [
-      {
-        type: String,
-        enum: [
-          "Action",
-          "Comedy",
-          "Drama",
-          "Horror",
-          "Sci-Fi",
-          "Romance",
-          "Thriller",
-          "Documentary",
-        ],
-      },
-    ],
     director: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    language: {
       type: String,
       required: true,
       trim: true,
