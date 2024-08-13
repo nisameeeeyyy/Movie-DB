@@ -9,6 +9,7 @@ const AddMovie = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const form = e.target;
         try {
             const res = await fetch('/api/add-movie', {
                 headers: {
@@ -20,12 +21,7 @@ const AddMovie = () => {
 
             if (res.ok) {
                 alert('Movie Added');
-                setData({
-                    title: '',
-                    year: '',
-                    director: '',
-                    rating: ''
-                  });
+                form.reset();
             }
         } catch (error) {
             console.log(error);
