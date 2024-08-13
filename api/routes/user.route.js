@@ -26,13 +26,11 @@ app.get("/get-all-movies", async (req, res) => {
 // POST Route: Add a New Movie
 app.post("/add-movie", async (req, res) => {
   try {
-    const { title, releaseDate, genres, director, language, rating } = req.body;
+    const { title, year, director, rating } = req.body;
     if (
       !title ||
-      !releaseDate ||
-      !genres ||
+      !year ||
       !director ||
-      !language ||
       !rating
     ) {
       res.status(400).json({
@@ -42,10 +40,8 @@ app.post("/add-movie", async (req, res) => {
     } else {
       const movie = new Movie({
         title,
-        releaseDate,
-        genres,
+        year,
         director,
-        language,
         rating,
       });
       await movie.save();
@@ -67,15 +63,13 @@ app.post("/add-movie", async (req, res) => {
 app.patch("/edit-movie/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, releaseDate, genres, director, language, rating } = req.body;
+    const { title, year, director, rating } = req.body;
 
     // Check for required fields
     if (
       !title ||
-      !releaseDate ||
-      !genres ||
+      !year ||
       !director ||
-      !language ||
       !rating
     ) {
       return res.status(400).json({
@@ -87,7 +81,7 @@ app.patch("/edit-movie/:id", async (req, res) => {
     // Attempt to update the movie
     const updatedMovie = await Movie.findByIdAndUpdate(
       id,
-      { title, releaseDate, genres, director, language, rating },
+      { title, year, director, rating },
       {
         new: true, // Return the updated document
         runValidators: true, // Validate data against schema
